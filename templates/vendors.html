@@ -1,0 +1,113 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+
+            {% include 'sidemenu.html' %}
+
+            <div class="col py-3">
+                <h2 class="text-center my-3">Welcome Vendors page</h2>
+
+
+                    {% if delete_token is True%}
+                        <script>
+                            swal("Deleted Sucessfully");
+                        </script>
+
+                    {% endif %}
+
+                        <div class="container">
+                            <div class="btn-block pull-right">
+                                <a href="" class="btn btn-primary pull-left">ADD</a>
+                            </div>
+                        </div>
+
+                <div class="container-fluid">
+                    <div class="row flex-nowrap">
+                        <div class="col py-3">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">SNo</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Action</th>
+
+                                        </tr>
+                                  </thead>
+
+                                    <tbody>
+                                    {% for vendors_list in vendors_data%}
+                                        <tr>
+
+                                          <th scope="row">{{forloop.counter}}</th>
+                                                <td>{{vendors_list.vendor_name}}</td>
+                                                <td>{{vendors_list.vendor_dec|slice:5}}...</td>
+                                                <td>{{vendors_list.category}}</td>
+                                                <td>
+
+                                                   <!--<img src="{{MEDIA_ROOT}}/media/{{vendors_list.vend_img}}" alt="" width="50" height="50" class="rounded-circle">-->
+                                                    <img src="{{vendors_list.vend_img.url}}" alt="" width="50" height="50" class="rounded-circle">
+
+                                                </td>
+                                          <td>
+
+                                                <button class="btn btn-primary float-right " ><a class="text-light" href=""  >Edit</a></button>
+
+                                                <button class="btn btn-primary float-right " ><a class="text-light" href=""  >Delete</a></button>
+
+
+
+                                              </form>
+                                          </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="my-3"  >
+                     {%if prev%}
+                        <button class="btn btn-primary float-right "><a class="text-light" href=""  >&laquo;Prev</a></button>
+                     {% else %}
+                         <button class="btn btn-primary float-right "><a class="text-light" href="#" >&laquo;Prev</a></button>
+                     {% endif %}
+
+                      {%if nxt%}
+                        <button class="btn btn-primary float-right"><a class="text-light" href="" >Next &raquo;</a></button>
+                     {% else %}
+                        <button class="btn btn-primary float-right"> <a class="text-light " href="#" >Next &raquo;</a></button>
+                     {% endif %}
+
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    {% include 'footer.html' %}
+
+  </body>
+</html>
